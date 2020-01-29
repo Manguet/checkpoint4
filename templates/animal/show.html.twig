@@ -5,7 +5,9 @@
 {% block body %}
     <div class="container-animal d-flex">
         <div class="profil-animal col col-lg-3">
-            <img src="{{ animal.image }}" alt="{{ animal.name }}">
+            <div class="d-flex justify-content-center">
+                <img src="{{ animal.image }}" alt="{{ animal.name }}">
+            </div>
             <p>Né le {{ animal.birthday|date('d/m/Y') }}</p>
             <p><u>Localisation :</u> {{ animal.localisation }}</p>
             <p><u>Espèce :</u> {{ animal.specie }}</p>
