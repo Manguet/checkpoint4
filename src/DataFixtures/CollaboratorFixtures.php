@@ -21,14 +21,14 @@ class CollaboratorFixtures extends Fixture
             'birthday'     => '15-04-1989 09:00:00',
             'description'  => 'Je suis Pédia et toujours avec ma Wiki !',
             'role'         => 'Femme talentueuse de caractère',
-            'image'        => 'https://zupimages.net/viewer.php?id=20/05/7wkt.jpg',
+            'image'        => 'https://zupimages.net/up/20/05/7wkt.jpg',
         ],
         'Benjamin Manguet' => [
             'localisation' => 'Pessac',
             'birthday'     => '15-03-1989 09:00:00',
             'description'  => 'Ancien ASV en reconversion professionnel !',
             'role'         => 'Soin aux animaux',
-            'image'        => 'https://zupimages.net/viewer.php?id=20/05/vcrs.jpg',
+            'image'        => 'https://zupimages.net/up/20/05/vcrs.jpg',
         ],
     ];
 

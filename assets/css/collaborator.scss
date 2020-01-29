@@ -1,0 +1,37 @@
+.container-collaborator {
+  margin: 17vh;
+  border: 1px solid $black;
+  background-color: $transp-white;
+
+  h1, p {
+    text-align: center;
+  }
+
+  .heart {
+    color: red;
+  }
+
+  img {
+    border-radius: 50%;
+    height: 30vh;
+    margin: 5vw;
+    border: 2px solid $white;
+  }
+
+  .left {
+    justify-content: flex-end;
+  }
+
+  .right {
+    justify-content: flex-start;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: center;
+  }
+
+  .pagination {
+    margin-bottom: 0;
+  }
+}
