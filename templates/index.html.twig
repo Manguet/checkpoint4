@@ -16,7 +16,7 @@
                         Ils nous permettent de continuer à faire vivre l'association !
                     </p>
                     {% if app.user != true %}
-                        <a href="#">
+                        <a href="{{ path('app_login') }}">
                             <button class="btn main-btn">
                                 Se Connecter
                             </button>

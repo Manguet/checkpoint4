@@ -17,7 +17,7 @@
         <div class="col col-lg-9">
             <h1 class="text-center">{{ animal.name }}</h1>
             <p class="text-justify">{{ animal.description }}</p>
-            <div class="d-flex justify-content-around">
+            <div class="d-flex justify-content-around mb-5">
                 {% for image in images %}
                     <img src="{{ image.url }}" alt="{{ image.title }}" class="images-animal">
                 {% else %}

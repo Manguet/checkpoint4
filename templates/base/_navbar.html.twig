@@ -22,8 +22,21 @@
                 <a class="nav-link active" href="#">Nos Jeux</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#">Connexion <i class="fas fa-user-circle"></i></a>
+                {% if app.user %}
+                    <a class="nav-link active" href="{{ path('app_logout') }}">Deconnexion</a>
+                {% else %}
+                    <div class="d-flex">
+                        <a class="nav-link active" href="{{ path('app_login') }}">Connexion</a>
+                        /
+                        <a class="nav-link active" href="{{ path('app_register') }}">Inscription</a>
+                    </div>
+                {% endif %}
             </li>
+            {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="#"><i class="fas fa-user-circle"></i></a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

@@ -46,6 +46,8 @@ class Profil
     {
         $this->roulette = new ArrayCollection();
         $this->blackjack = new ArrayCollection();
+        $this->setTitle(self::DEFAULT_TITLE);
+        $this->setTotalAmount(self::BASE_AMOUNT);
     }
 
     public function getId(): ?int
