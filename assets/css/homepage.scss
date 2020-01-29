@@ -41,10 +41,19 @@
 }
 
 .homepage-cards {
-
-  .card {
-    background-color: $green;
-    width: 10vw;
-    border: none;
+  a {
+    color: $black;
+    text-decoration: none;
+    .card {
+      background-color: $green;
+      width: 15vw;
+      border: none;
+    }
+    &:hover {
+      color: $white;
+      .card {
+        border: 1px solid $black;
+      }
+    }
   }
 }

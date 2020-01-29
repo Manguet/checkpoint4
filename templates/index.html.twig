@@ -43,12 +43,14 @@
 
         <div class="col col-4 homepage-cards d-flex flex-column justify-content-center align-items-center">
             {% for animal in lastAnimals %}
-                <div class="card mt-3">
-                    <img src="{{ animal.image }}" class="card-img-top" alt="photo de {{ animal.name }}">
-                    <div class="card-body">
-                        <p class="card-text text-center">{{ animal.name }}</p>
+                <a href="#">
+                    <div class="card mt-3">
+                        <img src="{{ animal.image }}" class="card-img-top" alt="photo de {{ animal.name }}">
+                        <div class="card-body">
+                            <p class="card-text text-center">{{ animal.name }}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             {% endfor %}
         </div>
 
