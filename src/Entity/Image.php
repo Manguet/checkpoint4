@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Image
 {
@@ -104,5 +106,23 @@ class Image
         $this->animal = $animal;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function handleCreationDate()
+    {
+        if ($this->getCreatedAt() === null) {
+            $this->setCreatedAt(new DateTimeImmutable());
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function handleUpdateDate()
+    {
+        $this->setUpdatedAt(new DateTimeImmutable());
     }
 }

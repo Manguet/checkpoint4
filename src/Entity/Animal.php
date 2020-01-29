@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnimalRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Animal
 {
@@ -266,5 +268,23 @@ class Animal
         $this->booking = $booking;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function handleCreationDate()
+    {
+        if ($this->getCreatedAt() === null) {
+            $this->setCreatedAt(new DateTimeImmutable());
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function handleUpdateDate()
+    {
+        $this->setUpdatedAt(new DateTimeImmutable());
     }
 }

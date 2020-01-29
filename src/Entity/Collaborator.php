@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CollaboratorRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Collaborator
 {
@@ -155,5 +157,23 @@ class Collaborator
         $this->updated_at = $updated_at;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function handleCreationDate()
+    {
+        if ($this->getCreatedAt() === null) {
+            $this->setCreatedAt(new DateTimeImmutable());
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function handleUpdateDate()
+    {
+        $this->setUpdatedAt(new DateTimeImmutable());
     }
 }

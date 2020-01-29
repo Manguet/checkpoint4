@@ -11,6 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Profil
 {
+    const BASE_AMOUNT = 100;
+
+    const DEFAULT_TITLE = 'Mon Profil';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -21,12 +25,12 @@ class Profil
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private $title = self::DEFAULT_TITLE;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $total_amount;
+    private $total_amount = self::BASE_AMOUNT;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Roulette", inversedBy="profils")
