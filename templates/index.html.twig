@@ -43,7 +43,7 @@
 
         <div class="col col-4 homepage-cards d-flex flex-column justify-content-center align-items-center">
             {% for animal in lastAnimals %}
-                <a href="#">
+                <a href="{{ path('animal_show', { 'id' : animal.id }) }}">
                     <div class="card mt-3">
                         <img src="{{ animal.image }}" class="card-img-top" alt="photo de {{ animal.name }}">
                         <div class="card-body">

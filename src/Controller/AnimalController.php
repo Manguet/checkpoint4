@@ -36,4 +36,19 @@ class AnimalController extends AbstractController
             'pagination' => $pagination,
         ]);
     }
+
+    /**
+     * @Route("/{id}", name="show")
+     * @param Animal $animal
+     * @return Response
+     */
+    public function showOneAnimal(Animal $animal)
+    {
+        $animalImages = $animal->getImages();
+
+        return $this->render('animal/show.html.twig', [
+            'animal' => $animal,
+            'images' => $animalImages,
+        ]);
+    }
 }

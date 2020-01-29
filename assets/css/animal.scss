@@ -40,3 +40,17 @@
     margin-bottom: 0;
   }
 }
+
+.profil-animal {
+  border-right: 1px solid $black;
+
+  img {
+    border-radius: 50%;
+    height: 20vh;
+    margin: 2vw;
+  }
+}
+
+.images-animal {
+  width: 20vw;
+}
