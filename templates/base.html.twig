@@ -13,6 +13,9 @@
         {% block navbar %}
             {% include 'base/_navbar.html.twig' %}
         {% endblock %}
+        {% block space %}
+            <div class="space-for-nav"></div>
+        {% endblock %}
 
         {% block flashes %}
             {% for label, messages in app.flashes() %}
