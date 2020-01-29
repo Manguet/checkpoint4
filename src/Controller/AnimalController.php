@@ -2,18 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Collaborator;
+use App\Entity\Animal;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /**
- * @Route("/collaborator", name="collaborator_")
+ * @Route("/animal", name="animal_")
  */
-class CollaboratorController extends AbstractController
+class AnimalController extends AbstractController
 {
     /**
      * @Route("", name="index")
@@ -23,18 +22,18 @@ class CollaboratorController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request)
     {
-        $collaborators = $this->getDoctrine()
-            ->getRepository(Collaborator::class)
+        $animals = $this->getDoctrine()
+            ->getRepository(Animal::class)
             ->findAll();
 
         $pagination = $paginator->paginate(
-            $collaborators,
+            $animals,
             $request->query->getInt('page', 1),
-            2
+            4
         );
 
-        return $this->render('collaborator/index.html.twig', [
-            'pagination'    => $pagination,
+        return $this->render('animal/index.html.twig', [
+            'pagination' => $pagination,
         ]);
     }
 }

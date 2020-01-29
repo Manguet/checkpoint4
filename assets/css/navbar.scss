@@ -15,4 +15,9 @@ nav {
     font-family: $title-text;
     font-size: 1.7rem;
   }
+
+  .navbar-toggler {
+    background-image: url("https://static.thenounproject.com/png/7898-200.png");
+    background-size: cover;
+  }
 }
