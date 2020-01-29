@@ -2,12 +2,13 @@ nav {
   background-color: $green;
   box-shadow: 3px 3px 3px $black;
   .navbar-brand {
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
   a {
     color: $black;
     &:hover {
       color: $white;
+      text-shadow: 2px 2px 2px $blue;
     }
   }
   .nav-link {

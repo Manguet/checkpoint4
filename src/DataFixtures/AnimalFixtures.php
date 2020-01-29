@@ -38,7 +38,7 @@ class AnimalFixtures extends Fixture
             'race'         => 'Européen',
             'color'        => 'Roux',
             'gender'       => 'Mâle',
-            'image'        => 'https://zupimages.net/viewer.php?id=20/05/v9q9.jpg',
+            'image'        => 'https://zupimages.net/up/20/05/v9q9.jpg',
         ],
         'Faya' => [
             'description'  => 'Faya est une petite chienne qui a eu de longues journées. Elle a été saisi et 

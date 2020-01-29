@@ -1,16 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PAGE A SUPPRIMER{% endblock %}
+{% block title %}Wild Circus{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="d-flex">
 
-<div class="example-wrapper">
-    <h1>SUPPRIMES-MOI !!!!!!!</h1>
-    <i class="far fa-address-card"></i>
-    ENLEVES-MOI EUHHHHHHHHHHHHHh
-</div>
+        <div class="col col-8 homepage">
+            <div class="container-homepage">
+                <div class="text-center container">
+                    <h1><span>W</span>ild <span>C</span>ircus</h1>
+                    <p class="homepage-uppertext">Bienvenu sur Wild Circus !</p>
+                    <p class="mt-5">
+                        Site pour découvrir la sauvegarde des animaux du cirque. <br>
+                        N'hésitez pas à parcourir les différentes sections et à participer aux différents jeux. <br>
+                        Ils nous permettent de continuer à faire vivre l'association !
+                    </p>
+                    {% if app.user != true %}
+                        <a href="#">
+                            <button class="btn main-btn">
+                                Se Connecter
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="container d-flex justify-content-around mt-5">
+                    <div class="text-center">
+                        <i class="fas fa-horse icon"></i>
+                        <p class="white-text">Car toutes les espèces sont importantes</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-spider icon"></i>
+                        <p class="white-text">Malgrès leur apparence</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-feather-alt icon"></i>
+                        <p class="white-text">Prenons soins d'elles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-4 homepage-cards d-flex flex-column justify-content-center align-items-center">
+            {% for animal in lastAnimals %}
+                <div class="card mt-3">
+                    <img src="{{ animal.image }}" class="card-img-top" alt="photo de {{ animal.name }}">
+                    <div class="card-body">
+                        <p class="card-text text-center">{{ animal.name }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
 {% endblock %}

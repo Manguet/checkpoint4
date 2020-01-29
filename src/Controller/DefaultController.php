@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+
+use App\Entity\Animal;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,8 +17,12 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
+        $lastAnimals = $this->getDoctrine()
+            ->getRepository(Animal::class)
+            ->findThreeLastAnimals();
+
         return $this->render('index.html.twig', [
-            'controller_name' => 'DefaultController',
+            'lastAnimals' => $lastAnimals,
         ]);
     }
 }
