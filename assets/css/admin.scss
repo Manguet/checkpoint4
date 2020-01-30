@@ -1,0 +1,22 @@
+.admin-container{
+  margin: 17vh;
+  border: 1px solid $black;
+  background-color: $transp-white;
+
+  .card {
+    width: 18rem;
+    a {
+      color: $black;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    .card-img-top {
+      font-size: 6rem;
+      color: $green;
+    }
+    &:hover {
+      background-color: $blue;
+    }
+  }
+}
