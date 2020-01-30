@@ -25,4 +25,12 @@ class DefaultController extends AbstractController
             'lastAnimals' => $lastAnimals,
         ]);
     }
+
+    /**
+     * @Route("/thanks", name="thanks")
+     */
+    public function thanks()
+    {
+        return $this->render('footer/thanks.html.twig');
+    }
 }
