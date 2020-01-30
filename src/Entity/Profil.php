@@ -30,7 +30,7 @@ class Profil
     /**
      * @ORM\Column(type="integer")
      */
-    private $total_amount = self::BASE_AMOUNT;
+    private $totalAmount = self::BASE_AMOUNT;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Roulette", inversedBy="profils")
@@ -69,12 +69,12 @@ class Profil
 
     public function getTotalAmount(): ?int
     {
-        return $this->total_amount;
+        return $this->totalAmount;
     }
 
-    public function setTotalAmount(int $total_amount): self
+    public function setTotalAmount(int $totalAmount): self
     {
-        $this->total_amount = $total_amount;
+        $this->totalAmount = $totalAmount;
 
         return $this;
     }

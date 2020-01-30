@@ -11,7 +11,7 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
 {
     const IMAGES = [
         "Mischa en box" => [
-            'image'    => 'mischa-box.jpeg',
+            'image'    => 'mischa-box.jpg',
             'animal' => 'animal_0',
         ],
         "Mischa la fin" => [
