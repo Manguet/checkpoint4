@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Animal;
 use App\Entity\Booking;
+use App\Entity\Collaborator;
 use App\Entity\Image;
 use App\Entity\User;
 use App\Form\AnimalImageType;
 use App\Form\AnimalType;
+use App\Form\CollaboratorType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -216,11 +218,6 @@ class AdminController extends AbstractController
 
         $form->handleRequest($request);
 
-        $image = new Image();
-        $image->setTitle('tuututut');
-        $image->setAnimal($animal);
-        $image->setImage('bjarmkbzv');
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($animal);
             $entityManager->flush();
@@ -283,6 +280,90 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_animal_new_images', [
             'id' => $animal->getId(),
+        ]);
+    }
+
+    /**
+     * @Route("/collaborators", name="collaborators")
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
+    public function collaboratorsIndex(PaginatorInterface $paginator)
+    {
+        $pagination = $paginator->paginate(
+            $this->getDoctrine()
+                ->getRepository(Collaborator::class)
+                ->findAll(),
+            1,
+            10);
+
+        return $this->render('admin/collaborators/collaborators.html.twig', [
+            'pagination' => $pagination,
+        ]);
+    }
+    /**
+     * @Route("/collaborator/new", name="collaborator_new")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function newCollaborator(EntityManagerInterface $entityManager, Request $request)
+    {
+        $collaborator = new Collaborator();
+        $form = $this->createForm(CollaboratorType::class, $collaborator);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($collaborator);
+            $entityManager->flush();
+            $this->addFlash('success', 'Le collaborateur a bien été ajouté !');
+
+            return $this->redirectToRoute('admin_collaborators');
+        }
+
+        return $this->render('admin/collaborators/new.html.twig', [
+            'form'   => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/collaborator/delete/{id}", name="collaborator_delete")
+     * @param Collaborator $collaborator
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse
+     */
+    public function deleteCollaborator(Collaborator $collaborator, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($collaborator);
+        $entityManager->flush();
+        $this->addFlash('success', 'Le collaborateur a bien été supprimée!');
+
+        return $this->redirectToRoute('admin_collaborators');
+    }
+
+    /**
+     * @Route("/collaborator/edit/{id}", name="collaborator_edit")
+     * @param Collaborator $collaborator
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function editCollaborator(Collaborator $collaborator, EntityManagerInterface $entityManager, Request $request)
+    {
+        $form = $this->createForm(CollaboratorType::class, $collaborator);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_collaborators');
+        }
+
+        return $this->render('admin/collaborators/edit.html.twig', [
+            'collaborator' => $collaborator,
+            'form'         => $form->createView(),
         ]);
     }
 }

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Collaborateurs{% endblock %}
+
+{% block body %}
+    <div class="admin-container">
+        <div class="container text-center">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Nom</td>
+                    <td>Date de naissance</td>
+                    <td>Localisation</td>
+                    <td>Role</td>
+                    <td>Action</td>
+                </tr>
+                </thead>
+                {% for collaborator in pagination %}
+                    <tr>
+                        <td>#</td>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ collaborator.name }}</td>
+                        <td>{{ collaborator.birthday | date('d/m/Y') }}</td>
+                        <td>{{ collaborator.localisation }}</td>
+                        <td>{{ collaborator.role }}</td>
+                        <td>
+                            <a href="{{ path('admin_collaborator_edit', { 'id' : collaborator.id }) }}" class="blue"><i class="fas fa-pen"></i></a>
+                            <a href="{{ path('admin_collaborator_delete', { 'id' : collaborator.id }) }}" class="red"><i class="fas fa-times"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="text-center m-5">
+                <a href="{{ path('admin_collaborator_new') }}">
+                    <button class="btn main-btn">Nouveau collaborateur</button>
+                </a>
+            </div>
+            <div class="navigation d-flex justify-content-center">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
