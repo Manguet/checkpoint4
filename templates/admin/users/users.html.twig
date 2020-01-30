@@ -16,7 +16,7 @@
                         <td>Actions</td>
                     </tr>
                 </thead>
-                {% for user in users %}
+                {% for user in pagination %}
                     <tr>
                         <td>#</td>
                         <td>{{ loop.index }}</td>
@@ -31,6 +31,9 @@
                     </tr>
                 {% endfor %}
             </table>
+            <div class="navigation d-flex justify-content-center">
+                {{ knp_pagination_render(pagination) }}
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Booking;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,6 +30,8 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/users", name="users")
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function userIndex(PaginatorInterface $paginator)
     {
@@ -49,8 +52,8 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/users/users.html.twig', [
-            'users' => $pagination,
-            'roles' => $roles,
+            'pagination' => $pagination,
+            'roles'      => $roles,
         ]);
     }
 
@@ -64,7 +67,7 @@ class AdminController extends AbstractController
     {
         $entityManager->remove($user);
         $entityManager->flush();
-        $this->addFlash('success', 'L\'utilisateur a bein été supprimé!');
+        $this->addFlash('success', 'L\'utilisateur a bien été supprimé!');
 
         return $this->redirectToRoute('admin_users');
     }
@@ -91,5 +94,39 @@ class AdminController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/bookings", name="bookings")
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
+    public function bookingIndex(PaginatorInterface $paginator)
+    {
+         $pagination = $paginator->paginate(
+            $this->getDoctrine()
+                ->getRepository(Booking::class)
+                ->findAllBookingByDate(),
+            1,
+            10);
+
+        return $this->render('admin/bookings/bookings.html.twig', [
+            'pagination' => $pagination,
+        ]);
+    }
+
+    /**
+     * @Route("/booking/delete/{id}", name="booking_delete")
+     * @param Booking $booking
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse
+     */
+    public function deleteBooking(Booking $booking, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($booking);
+        $entityManager->flush();
+        $this->addFlash('success', 'La date a bien été supprimé!');
+
+        return $this->redirectToRoute('admin_bookings');
     }
 }
