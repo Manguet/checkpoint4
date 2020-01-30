@@ -10,7 +10,7 @@
             Vous me manquerez !
         </p>
         {% for collaborator in pagination %}
-            <div class="d-flex align-items-center {{ loop.index % 2 == 0 ? 'left' : 'right' }}">
+            <div class="collabs {{ loop.index % 2 == 0 ? 'left' : 'right' }}">
                 <img src="/uploads/collaborator/{{ collaborator.image }}" alt="Photo de {{ collaborator.name }}">
                 <div>
                     <table class="table table-responsive table-hover">

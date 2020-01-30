@@ -7,3 +7,10 @@
     font-size: 1.7rem;
   }
 }
+
+@media screen and (max-width: 650px){
+  .container-contact {
+    margin-left: 5vh;
+    margin-right: 5vh;
+  }
+}

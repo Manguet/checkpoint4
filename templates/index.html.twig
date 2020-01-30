@@ -5,7 +5,7 @@
 {% block body %}
     <div class="d-flex">
 
-        <div class="col col-8 homepage">
+        <div class="col col-lg-8 col-md-8 col-sm-12 homepage">
             <div class="container-homepage">
                 <div class="text-center container">
                     <h1><span>W</span>ild <span>C</span>ircus</h1>
@@ -24,7 +24,7 @@
                     {% endif %}
                 </div>
 
-                <div class="container d-flex justify-content-around mt-5">
+                <div class="container mt-5">
                     <div class="text-center">
                         <i class="fas fa-horse icon"></i>
                         <p class="white-text">Car toutes les espèces sont importantes</p>
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class="col col-4 homepage-cards d-flex flex-column justify-content-center align-items-center">
+        <div class="col col-lg-4 col-md-4 homepage-cards">
             {% for animal in lastAnimals %}
                 <a href="{{ path('animal_show', { 'id' : animal.id }) }}">
                     <div class="card mt-3">

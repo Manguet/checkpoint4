@@ -3,6 +3,11 @@
   border: 1px solid $black;
   background-color: $transp-white;
 
+  .collabs {
+    display: flex;
+    align-items: center;
+  }
+
   h1, p {
     text-align: center;
   }
@@ -33,5 +38,18 @@
 
   .pagination {
     margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 1250px){
+  .container-collaborator {
+    .collabs {
+      flex-direction: column;
+    }
+  }
+}
+@media screen and (max-width: 650px){
+  .container-collaborator {
+    margin-left: 5vh;
+    margin-right: 5vh;
   }
 }

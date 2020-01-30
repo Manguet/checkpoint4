@@ -5,9 +5,14 @@
   background-repeat: no-repeat;
 
   .container-homepage {
-
     background-color: $transp-white;
     margin: 3vh;
+
+    .banner-animals {
+      margin-top: 5vh;
+      display: flex;
+      justify-content: space-around;
+    }
 
     .homepage-uppertext {
       font-size: 3.5rem;
@@ -29,6 +34,11 @@
 }
 
 .homepage-cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   a {
     color: $black;
     text-decoration: none;
@@ -43,5 +53,11 @@
         border: 1px solid $black;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1100px){
+  .homepage-cards {
+    display: none;
   }
 }

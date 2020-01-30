@@ -54,3 +54,20 @@
 .images-animal {
   width: 20vw;
 }
+@media screen and (max-width: 650px){
+  .container-animal {
+    margin-left: 5vh;
+    margin-right: 5vh;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .card {
+    .card-title, .card-text {
+      display: none;
+    }
+  }
+  .card-img {
+    width: 50vw;
+  }
+}
