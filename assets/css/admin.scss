@@ -19,4 +19,24 @@
       background-color: $blue;
     }
   }
+
+  table {
+    thead {
+      font-weight: bold;
+    }
+    .blue {
+      color: $blue;
+      font-size: 1.7rem;
+      &:hover {
+        color: $white;
+      }
+    }
+    .red {
+      color: red;
+      font-size: 1.7rem;
+      &:hover {
+        color: $white;
+      }
+    }
+  }
 }
