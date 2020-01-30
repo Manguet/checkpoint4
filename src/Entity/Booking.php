@@ -26,23 +26,17 @@ class Booking
     /**
      * @ORM\Column(type="datetime")
      */
-    private $at_date;
+    private $atDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Animal", mappedBy="booking")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="bookings")
      */
-    private $animals;
+    private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="booking")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Animal", inversedBy="bookings")
      */
-    private $users;
-
-    public function __construct()
-    {
-        $this->animals = new ArrayCollection();
-        $this->users = new ArrayCollection();
-    }
+    private $animal;
 
     public function getId(): ?int
     {
@@ -63,74 +57,36 @@ class Booking
 
     public function getAtDate(): ?\DateTimeInterface
     {
-        return $this->at_date;
+        return $this->atDate;
     }
 
-    public function setAtDate(\DateTimeInterface $at_date): self
+    public function setAtDate(\DateTimeInterface $atDate): self
     {
-        $this->at_date = $at_date;
+        $this->atDate = $atDate;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Animal[]
-     */
-    public function getAnimals(): Collection
+    public function getUser(): ?User
     {
-        return $this->animals;
+        return $this->user;
     }
 
-    public function addAnimal(Animal $animal): self
+    public function setUser(?User $user): self
     {
-        if (!$this->animals->contains($animal)) {
-            $this->animals[] = $animal;
-            $animal->setBooking($this);
-        }
+        $this->user = $user;
 
         return $this;
     }
 
-    public function removeAnimal(Animal $animal): self
+    public function getAnimal(): ?Animal
     {
-        if ($this->animals->contains($animal)) {
-            $this->animals->removeElement($animal);
-            // set the owning side to null (unless already changed)
-            if ($animal->getBooking() === $this) {
-                $animal->setBooking(null);
-            }
-        }
-
-        return $this;
+        return $this->animal;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
+    public function setAnimal(?Animal $animal): self
     {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setBooking($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getBooking() === $this) {
-                $user->setBooking(null);
-            }
-        }
+        $this->animal = $animal;
 
         return $this;
     }

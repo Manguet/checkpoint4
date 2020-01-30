@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -41,15 +43,20 @@ class User implements UserInterface
     private $nickname;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Booking", inversedBy="users")
-     */
-    private $booking;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Profil", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $profil;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="user")
+     */
+    private $bookings;
+
+    public function __construct()
+    {
+        $this->bookings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -141,18 +148,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBooking(): ?Booking
-    {
-        return $this->booking;
-    }
-
-    public function setBooking(?Booking $booking): self
-    {
-        $this->booking = $booking;
-
-        return $this;
-    }
-
     public function getProfil(): ?Profil
     {
         return $this->profil;
@@ -161,6 +156,37 @@ class User implements UserInterface
     public function setProfil(Profil $profil): self
     {
         $this->profil = $profil;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getUser() === $this) {
+                $booking->setUser(null);
+            }
+        }
 
         return $this;
     }

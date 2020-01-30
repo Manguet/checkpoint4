@@ -81,13 +81,15 @@ class Animal
     private $images;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Booking", inversedBy="animals")
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="animal")
      */
-    private $booking;
+    private $bookings;
+
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -258,18 +260,6 @@ class Animal
         return $this;
     }
 
-    public function getBooking(): ?Booking
-    {
-        return $this->booking;
-    }
-
-    public function setBooking(?Booking $booking): self
-    {
-        $this->booking = $booking;
-
-        return $this;
-    }
-
     /**
      * @ORM\PrePersist()
      */
@@ -286,5 +276,36 @@ class Animal
     public function handleUpdateDate()
     {
         $this->setUpdatedAt(new DateTimeImmutable());
+    }
+
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getAnimal() === $this) {
+                $booking->setAnimal(null);
+            }
+        }
+
+        return $this;
     }
 }
