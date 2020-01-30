@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,11 +30,13 @@ class AdminController extends AbstractController
     /**
      * @Route("/users", name="users")
      */
-    public function userIndex()
+    public function userIndex(PaginatorInterface $paginator)
     {
         $users = $this->getDoctrine()
             ->getRepository(User::class)
             ->findAll();
+
+        $pagination = $paginator->paginate($users,1,10);
 
         $roles = [];
 
@@ -46,7 +49,7 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/users/users.html.twig', [
-            'users' => $users,
+            'users' => $pagination,
             'roles' => $roles,
         ]);
     }
