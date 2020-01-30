@@ -7,7 +7,7 @@ vich_uploader:
             upload_destination: '%kernel.project_dir%/public/uploads/animal'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
 
-            delete_on_update: true
+            delete_on_update: false
             delete_on_remove: true
 
         collaborator:
@@ -15,7 +15,7 @@ vich_uploader:
             upload_destination: '%kernel.project_dir%/public/uploads/collaborator'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
 
-            delete_on_update: true
+            delete_on_update: false
             delete_on_remove: true
 
         image:
@@ -23,7 +23,7 @@ vich_uploader:
             upload_destination: '%kernel.project_dir%/public/uploads/image'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
 
-            delete_on_update: true
+            delete_on_update: false
             delete_on_remove: true
     #mappings:
     #    products:

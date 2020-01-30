@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter des images{% endblock %}
+
+{% block body %}
+    <div class="admin-container">
+        <div class="container text-center">
+            <h1 class="text-center">Ajouter des Images</h1>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn main-btn m-5">Valider</button>
+            {{ form_end(form) }}
+
+            <div class="row">
+                {% for image in images %}
+                    <div class="d-flex flex-column">
+                        <img src="/uploads/image/{{ image.image }}" alt="{{ image.title }}" class="img-add m-5">
+                        <a href="{{ path('admin_animal_image_delete', { 'id' : image.id }) }}" class="red"><i class="fas fa-times"></i></a>
+                    </div>
+                {% else %}
+                    Aucune Image actuellement
+                {% endfor %}
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="{{ path('admin_index') }}">
+                <button class="btn main-btn">Retour à l'accueil Administrateur</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CollaboratorRepository")
+ * @Vich\Uploadable
  * @ORM\HasLifecycleCallbacks()
  */
 class Collaborator
@@ -49,14 +52,21 @@ class Collaborator
     private $image;
 
     /**
+     * @Vich\UploadableField(mapping="collaborator", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
+
+
+    /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_at;
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -128,33 +138,47 @@ class Collaborator
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function setImageFile(File $image = null)
     {
-        return $this->created_at;
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function getImageFile()
     {
-        $this->created_at = $created_at;
+        return $this->imageFile;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

@@ -11,7 +11,7 @@
         </p>
         {% for collaborator in pagination %}
             <div class="d-flex align-items-center {{ loop.index % 2 == 0 ? 'left' : 'right' }}">
-                <img src="{{ collaborator.image }}" alt="Photo de {{ collaborator.name }}">
+                <img src="/uploads/collaborator/{{ collaborator.image }}" alt="Photo de {{ collaborator.name }}">
                 <div>
                     <table class="table table-responsive table-hover">
                         <tr>

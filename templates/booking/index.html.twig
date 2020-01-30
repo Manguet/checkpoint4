@@ -18,8 +18,8 @@
                 <div class="border-left">
                     <div class="row m-5">
                     {% for booking in pagination %}
-                            <p class="text-center">
-                                {{ booking.user.nickname }}<br>
+                            <p class="text-center mr-5">
+                                <span class="font-weight-bold">{{ booking.user.nickname }}</span><br>
                                 {{ booking.atDate|date('d/m/Y H:i') }} <br>
                                 {{ booking.animal.name }}
                             </p>

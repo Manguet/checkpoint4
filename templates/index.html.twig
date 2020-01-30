@@ -45,7 +45,7 @@
             {% for animal in lastAnimals %}
                 <a href="{{ path('animal_show', { 'id' : animal.id }) }}">
                     <div class="card mt-3">
-                        <img src="{{ animal.image }}" class="card-img-top" alt="photo de {{ animal.name }}">
+                        <img src="/uploads/animal/{{ animal.image }}" class="card-img-top" alt="photo de {{ animal.name }}">
                         <div class="card-body">
                             <p class="card-text text-center">{{ animal.name }}</p>
                         </div>

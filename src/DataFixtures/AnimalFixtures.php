@@ -27,7 +27,7 @@ class AnimalFixtures extends Fixture
             'race'         => 'Ours Brun',
             'color'        => 'Marron',
             'gender'       => 'Mâle',
-            'image'        => 'https://img.20mn.fr/LB7TYhQgTMmthJugY4s1Iw/640x410_ours-micha-lors-dernier-spectacle-calais.jpg',
+            'image'        => 'mischa.jpg',
         ],
         'Pharaon' => [
             'description'  => 'Pharaon est un chat de cirque qui a été reccueilli par nos bénévoles. Suite à des 
@@ -38,7 +38,7 @@ class AnimalFixtures extends Fixture
             'race'         => 'Européen',
             'color'        => 'Roux',
             'gender'       => 'Mâle',
-            'image'        => 'https://zupimages.net/up/20/05/v9q9.jpg',
+            'image'        => 'pharaon.jpg',
         ],
         'Faya' => [
             'description'  => 'Faya est une petite chienne qui a eu de longues journées. Elle a été saisi et 
@@ -49,7 +49,7 @@ class AnimalFixtures extends Fixture
             'race'         => 'Bull Terrier',
             'color'        => 'Noir et Blanc',
             'gender'       => 'Femelle',
-            'image'        => 'https://i.pinimg.com/originals/2f/92/4f/2f924fed119910f7fefd0ab47e2096f9.jpg',
+            'image'        => 'faya.jpg',
         ],
     ];
     public function load(ObjectManager $manager)

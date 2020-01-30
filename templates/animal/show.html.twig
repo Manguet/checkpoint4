@@ -6,7 +6,7 @@
     <div class="container-animal d-flex">
         <div class="profil-animal col col-lg-3">
             <div class="d-flex justify-content-center">
-                <img src="{{ animal.image }}" alt="{{ animal.name }}">
+                <img src="/uploads/animal/{{ animal.image }}" alt="{{ animal.name }}">
             </div>
             <p>Né le {{ animal.birthday|date('d/m/Y') }}</p>
             <p><u>Localisation :</u> {{ animal.localisation }}</p>
@@ -21,7 +21,7 @@
             <p class="text-justify">{{ animal.description }}</p>
             <div class="d-flex justify-content-around mb-5">
                 {% for image in images %}
-                    <img src="{{ image.url }}" alt="{{ image.title }}" class="images-animal">
+                    <img src="/uploads/image/{{ image.image }}" alt="{{ image.title }}" class="images-animal">
                 {% else %}
                     Aucune image actuellement disponible
                 {% endfor %}

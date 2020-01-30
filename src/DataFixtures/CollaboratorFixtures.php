@@ -14,21 +14,21 @@ class CollaboratorFixtures extends Fixture
             'birthday'     => '19-12-1986 09:00:00',
             'description'  => 'Je suis Wiki et toujours avec ma Pédia !',
             'role'         => 'Chercheuse',
-            'image'        => 'https://i1.rgstatic.net/ii/profile.image/754600038658058-1556922077858_Q512/Anne_Quiedeville.jpg',
+            'image'        => 'Anne_Quiedeville.jpg',
         ],
         'Celine Godichon' => [
             'localisation' => 'Bordeaux',
             'birthday'     => '15-04-1989 09:00:00',
             'description'  => 'Je suis Pédia et toujours avec ma Wiki !',
             'role'         => 'Femme talentueuse de caractère',
-            'image'        => 'https://zupimages.net/up/20/05/7wkt.jpg',
+            'image'        => 'celine.jpg',
         ],
         'Benjamin Manguet' => [
             'localisation' => 'Pessac',
             'birthday'     => '15-03-1989 09:00:00',
             'description'  => 'Ancien ASV en reconversion professionnel !',
             'role'         => 'Soin aux animaux',
-            'image'        => 'https://zupimages.net/up/20/05/vcrs.jpg',
+            'image'        => 'Profil.jpg',
         ],
     ];
 

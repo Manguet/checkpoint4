@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Animal;
 use App\Entity\Booking;
+use App\Entity\Image;
 use App\Entity\User;
+use App\Form\AnimalImageType;
+use App\Form\AnimalType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -128,5 +132,157 @@ class AdminController extends AbstractController
         $this->addFlash('success', 'La date a bien été supprimé!');
 
         return $this->redirectToRoute('admin_bookings');
+    }
+
+    /**
+     * @Route("/animals", name="animals")
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
+    public function animalIndex(PaginatorInterface $paginator)
+    {
+        $pagination = $paginator->paginate(
+            $this->getDoctrine()
+                ->getRepository(Animal::class)
+                ->findAll(),
+            1,
+            10);
+
+        return $this->render('admin/animals/animals.html.twig', [
+            'pagination' => $pagination,
+        ]);
+    }
+
+    /**
+     * @Route("/animal/delete/{id}", name="animal_delete")
+     * @param Animal $animal
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse
+     */
+    public function deleteAnimal(Animal $animal, EntityManagerInterface $entityManager)
+    {
+        foreach ($animal->getImages() as $image) {
+            $entityManager->remove($image);
+        }
+
+        foreach ($animal->getBookings() as $booking) {
+            $entityManager->remove($booking);
+        }
+
+        $entityManager->remove($animal);
+        $entityManager->flush();
+        $this->addFlash('success', 'L\'animal a bien été supprimé!');
+
+        return $this->redirectToRoute('admin_animals');
+    }
+
+    /**
+     * @Route("/animal/edit/{id}", name="animal_edit")
+     * @param Animal $animal
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function editAnimal(Animal $animal, EntityManagerInterface $entityManager, Request $request)
+    {
+        $form = $this->createForm(AnimalType::class, $animal);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_animal_new_images', [
+                'id' => $animal->getId(),
+            ]);
+        }
+
+        return $this->render('admin/animals/edit.html.twig', [
+            'animal' => $animal,
+            'form'   => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/animal/new", name="animal_new")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function newAnimal(EntityManagerInterface $entityManager, Request $request)
+    {
+        $animal = new Animal();
+        $form = $this->createForm(AnimalType::class, $animal);
+
+        $form->handleRequest($request);
+
+        $image = new Image();
+        $image->setTitle('tuututut');
+        $image->setAnimal($animal);
+        $image->setImage('bjarmkbzv');
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($animal);
+            $entityManager->flush();
+            $this->addFlash('success', 'L\'animal a bien été ajouté !');
+
+            return $this->redirectToRoute('admin_animal_new_images', [
+                'id' => $animal->getId(),
+            ]);
+        }
+
+        return $this->render('admin/animals/new.html.twig', [
+            'form'   => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/animal/new/images/{id}", name="animal_new_images")
+     * @param Animal $animal
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function newAnimalImages(Animal $animal, EntityManagerInterface $entityManager, Request $request)
+    {
+        $image = new Image();
+
+        $form = $this->createForm(AnimalImageType::class, $image);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $image->setAnimal($animal);
+            $entityManager->persist($image);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'l\'image a bien été supprimée! Vous pouvez continuer a en ajouter si vous le voulez !');
+            return $this->redirectToRoute('admin_animal_new_images', [
+                'id' => $animal->getId(),
+            ]);
+        }
+
+        return $this->render('admin/animals/images.html.twig', [
+            'form'   => $form->createView(),
+            'images' => $animal->getImages(),
+        ]);
+    }
+
+    /**
+     * @Route("/animal/image/delete/{id}", name="animal_image_delete")
+     * @param Image $image
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse
+     */
+    public function deleteAnimalImage(Image $image, EntityManagerInterface $entityManager)
+    {
+        $animal = $image->getAnimal();
+
+        $entityManager->remove($image);
+        $entityManager->flush();
+        $this->addFlash('success', 'L\'image a bien été supprimée!');
+
+        return $this->redirectToRoute('admin_animal_new_images', [
+            'id' => $animal->getId(),
+        ]);
     }
 }

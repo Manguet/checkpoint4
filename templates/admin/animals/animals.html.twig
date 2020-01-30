@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Animaux{% endblock %}
+
+{% block body %}
+    <div class="admin-container">
+        <div class="container text-center">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Nom</td>
+                    <td>Date de naissance</td>
+                    <td>Localisation</td>
+                    <td>Espèce</td>
+                    <td>Action</td>
+                </tr>
+                </thead>
+                {% for animal in pagination %}
+                    <tr>
+                        <td>#</td>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ animal.name }}</td>
+                        <td>{{ animal.birthday | date('d/m/Y') }}</td>
+                        <td>{{ animal.localisation }}</td>
+                        <td>{{ animal.specie }}</td>
+                        <td>
+                            <a href="{{ path('animal_show', { 'id' : animal.id }) }}" class="blue"><i class="far fa-eye"></i></a>
+                            <a href="{{ path('admin_animal_edit', { 'id' : animal.id }) }}" class="blue"><i class="fas fa-pen"></i></a>
+                            <a href="{{ path('admin_animal_delete', { 'id' : animal.id }) }}" class="red"><i class="fas fa-times"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="text-center m-5">
+                <a href="{{ path('admin_animal_new') }}">
+                    <button class="btn main-btn">Nouvel animal</button>
+                </a>
+            </div>
+            <div class="navigation d-flex justify-content-center">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
