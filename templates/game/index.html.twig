@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Place au jeu{% endblock %}
+
+{% block body %}
+<div class="game-container">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <p>BlackJack</p>
+            <a href="#">Historique</a>
+            <p>WildCoins : {{ user.profil.totalAmount }}</p>
+        </div>
+
+        <div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

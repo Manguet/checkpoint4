@@ -60,3 +60,10 @@
     width: 18rem;
   }
 }
+
+@media screen and (max-width: 650px){
+  .admin-container {
+    margin-left: 2vh;
+    margin-right: 2vh;
+  }
+}
