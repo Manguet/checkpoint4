@@ -11,7 +11,7 @@
                 <p>Score du Croupier : {{ blackJack.bankScore }}</p>
             </div>
             <div class="boardtable mb-5 d-flex flex-column align-items-center">
-                <h1>Vous avez gagné {{ blackJack.toPay }} WildCoins</h1>
+                <h1>Vous avez gagné {{ blackJack.toPay | abs }} WildCoins</h1>
                 <div>
                     <a href="{{ path('game_new') }}">
                         <button class="btn main-btn">Rejouer</button>
