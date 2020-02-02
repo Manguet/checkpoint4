@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ collaborator.name }}{% endblock %}
+
+{% block body %}
+    <div class="admin-container">
+        <div class="container text-center">
+            <h1 class="text-center">{{ collaborator.name }}</h1>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn main-btn m-5">Valider</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

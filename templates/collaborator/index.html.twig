@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Collaborateurs{% endblock %}
+
+{% block body %}
+    <div class="container-collaborator">
+        <h1>Nos {{ pagination.getTotalItemCount }} Collaborateurs</h1>
+        <p>
+            Un grand merci à tous les Wilders <i class="fas fa-heart heart"></i> !<br>
+            Vous me manquerez !
+        </p>
+        {% for collaborator in pagination %}
+            <div class="collabs {{ loop.index % 2 == 0 ? 'left' : 'right' }}">
+                <img src="/uploads/collaborator/{{ collaborator.image }}" alt="Photo de {{ collaborator.name }}">
+                <div>
+                    <table class="table table-responsive table-hover">
+                        <tr>
+                            <td>Nom :</td>
+                            <td class="text-right">{{ collaborator.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date de Naissance :</td>
+                            <td class="text-right">{{ collaborator.birthday|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Role :</td>
+                            <td class="text-right">{{ collaborator.role }}</td>
+                        </tr>
+                        <tr>
+                            <td>Localisation :</td>
+                            <td class="text-right">{{ collaborator.localisation }}</td>
+                        </tr>
+                        <tr>
+                            <td>Description :</td>
+                            <td class="text-right">{{ collaborator.description }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+{% endblock %}

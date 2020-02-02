@@ -1,0 +1,66 @@
+.homepage {
+  border-right: 2px solid $white;
+  background-image: url("https://cdn.pixabay.com/photo/2020/01/23/17/35/monkey-4788328_960_720.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .container-homepage {
+    background-color: $transp-white;
+    margin: 3vh;
+
+    .banner-animals {
+      margin-top: 5vh;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .homepage-uppertext {
+      font-size: 3.5rem;
+    }
+
+    .icon {
+      font-size: 5rem;
+      color: $white;
+      padding: 6px;
+      border-radius: 50%;
+      border: 1px solid $white;
+      background-color: $blue;
+    }
+
+    .white-text {
+      color: $white;
+    }
+  }
+}
+
+.homepage-cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    color: $black;
+    text-decoration: none;
+    .card {
+      background-color: $green;
+      width: 15vw;
+      border: none;
+    }
+    &:hover {
+      color: $white;
+      .card {
+        border: 1px solid $black;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1100px){
+  .homepage-cards {
+    display: none;
+  }
+  .banner-animals {
+    flex-direction: column;
+  }
+}

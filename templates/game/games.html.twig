@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Parties{% endblock %}
+
+{% block body %}
+    <div class="admin-container">
+        <div class="container text-center">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Détail</td>
+                    <td>Perte/Gain</td>
+                    <td>Scores</td>
+                    <td>Date</td>
+                </tr>
+                </thead>
+                {% for game in profil.blackJack %}
+                    <tr>
+                        <td>#</td>
+                        <td>{{ loop.index }}</td>
+                        <td>
+                            {% if game.playerScore > game.bankScore and game.playerScore <= 21 %}
+                                Victoire
+                            {% else %}
+                                Défaite
+                            {% endif %}
+                        </td>
+                        <td>{{ game.toPay }}</td>
+                        <td>Joueur {{ game.playerScore }} / {{ game.bankScore }} Croupier</td>
+                        <td>{{ game.playedAt | date('d/m/Y H:i') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

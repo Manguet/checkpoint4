@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Place au jeu{% endblock %}
+
+{% block body %}
+    <div class="game-container">
+        <div class="container">
+            {% include 'game/templates/header.html.twig' %}
+            <div class="d-flex justify-content-between">
+                <p>Votre Score : {{ blackJack.playerScore }}</p>
+                <p>Score du Croupier : {{ blackJack.bankScore }}</p>
+            </div>
+            <div class="boardtable mb-5 d-flex justify-content-around align-items-center">
+                <div class="d-flex flex-column">
+                    <h2>Votre Carte</h2>
+                    <img src="/uploads/blackjack/{{ playerCard.image }}" alt="{{ playerCard.name }}">
+                    <a href="{{ path('game_draw', { 'id' : blackJack.id }) }}">
+                        <button type="button" class="btn main-btn m-5">
+                            Piocher une carte
+                        </button>
+                    </a>
+                </div>
+
+                <div class="d-flex flex-column">
+                    <h2>Carte de la banque</h2>
+                    {% if bankCard %}
+                    <img src="/uploads/blackjack/{{ bankCard.image }}" alt="{{ bankCard.name }}">
+                    {% else %}
+                    <p>Le croupier n'a pas pioché</p>
+                    {% endif %}
+                    <a href="{{ path('game_result', { 'id' : blackJack.id }) }}">
+                        <button type="button" class="btn main-btn m-5">
+                            Ne plus piocher
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

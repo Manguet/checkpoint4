@@ -1,0 +1,39 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        animal:
+            uri_prefix: /uploads/animal
+            upload_destination: '%kernel.project_dir%/public/uploads/animal'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+            delete_on_update: false
+            delete_on_remove: true
+
+        collaborator:
+            uri_prefix: /uploads/collaborator
+            upload_destination: '%kernel.project_dir%/public/uploads/collaborator'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+            delete_on_update: false
+            delete_on_remove: true
+
+        image:
+            uri_prefix: /uploads/image
+            upload_destination: '%kernel.project_dir%/public/uploads/image'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+            delete_on_update: false
+            delete_on_remove: true
+
+        card:
+            uri_prefix: /uploads/blackjack
+            upload_destination: '%kernel.project_dir%/public/uploads/blackjack'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+            delete_on_update: false
+            delete_on_remove: true
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'

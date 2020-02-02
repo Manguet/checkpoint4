@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ animal.name }}{% endblock %}
+
+{% block body %}
+    <div class="container-animal d-flex">
+        <div class="profil-animal col col-lg-3">
+            <div class="d-flex justify-content-center">
+                <img src="/uploads/animal/{{ animal.image }}" alt="{{ animal.name }}">
+            </div>
+            <p>Né le {{ animal.birthday|date('d/m/Y') }}</p>
+            <p><u>Localisation :</u> {{ animal.localisation }}</p>
+            <p><u>Espèce :</u> {{ animal.specie }}</p>
+            <p><u>Race :</u> {{ animal.race }}</p>
+            <p><u>Couleur :</u> {{ animal.color }}</p>
+            <p><u>Sexe :</u> {{ animal.gender }}</p>
+        </div>
+
+        <div class="col col-lg-9">
+            <h1 class="text-center">{{ animal.name }}</h1>
+            <p class="text-justify">{{ animal.description }}</p>
+            <div class="d-flex justify-content-around mb-5">
+                {% for image in images %}
+                    <img src="/uploads/image/{{ image.image }}" alt="{{ image.title }}" class="images-animal">
+                {% else %}
+                    Aucune image actuellement disponible
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Animal{% endblock %}
+
+{% block body %}
+    <div class="admin-container">
+        <div class="container text-center">
+            <h1 class="text-center">Ajouter un Animal</h1>
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.birthday) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.localisation) }}
+            {{ form_row(form.specie) }}
+            {{ form_row(form.race) }}
+            {{ form_row(form.color) }}
+            {{ form_row(form.gender) }}
+            {{ form_row(form.imageFile) }}
+                <button class="btn main-btn m-5">Valider</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

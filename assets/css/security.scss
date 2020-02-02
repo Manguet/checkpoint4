@@ -1,0 +1,16 @@
+.container-login {
+  margin: 17vh;
+  border: 1px solid $black;
+  background-color: $transp-white;
+
+  input {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 650px){
+  .container-login {
+    margin-left: 5vh;
+    margin-right: 5vh;
+  }
+}

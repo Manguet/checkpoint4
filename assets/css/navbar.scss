@@ -1,0 +1,24 @@
+nav {
+  background-color: $green;
+  box-shadow: 3px 3px 3px $black;
+  .navbar-brand {
+    font-size: 3.5rem;
+  }
+  a {
+    color: $black;
+    &:hover {
+      color: $white;
+      text-shadow: 2px 2px 2px $blue;
+    }
+  }
+  .nav-link {
+    font-family: $title-text;
+    font-size: 1.7rem;
+    margin-left: 1.1vw;
+  }
+
+  .navbar-toggler {
+    background-image: url("https://static.thenounproject.com/png/7898-200.png");
+    background-size: cover;
+  }
+}

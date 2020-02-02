@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Service d'aide{% endblock %}
+
+{% block body %}
+    <div class="container-booking">
+        <h1 class="text-center">Service d'aide en ligne</h1>
+            <div class="container d-flex">
+                <div class="col col-lg-5">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <div class="text-center mb-5">
+                        <button class="btn main-btn">Envoyer la demande</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+
+                <div class="border-left">
+                    <div class="row m-5">
+                    {% for booking in pagination %}
+                            <p class="text-center mr-5">
+                                <span class="font-weight-bold">{{ booking.user.nickname }}</span><br>
+                                {{ booking.atDate|date('d/m/Y H:i') }} <br>
+                                {{ booking.animal.name }}
+                            </p>
+                    {% endfor %}
+                    </div>
+                    <div class="navigation d-flex justify-content-center">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}

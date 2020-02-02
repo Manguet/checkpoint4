@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bonjour {{ user.nickname }}{% endblock %}
+
+{% block body %}
+    <div class="profil-container">
+        <div class="container">
+            <h1 class="text-center">{{ user.nickname }}</h1>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="text-center mb-5">
+                <button class="btn main-btn">Valider</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

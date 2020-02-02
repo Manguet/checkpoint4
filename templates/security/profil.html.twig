@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bonjour {{ user.nickname }}{% endblock %}
+
+{% block body %}
+    <div class="profil-container">
+        <div class="container">
+            <h1 class="text-center">Bienvenue {{ user.nickname }}</h1>
+            <p class="text-center">Voici vos informations personnelles</p>
+            <p class="mt-5"><u>Mon Email :</u> {{ user.email }}</p>
+            <p><u>Mon Pseudo :</u> {{ user.nickname }}</p>
+            <p><u>Mon Nom de profil :</u> {{ user.profil.title }}</p>
+            <p><u>Mon total de WildCoins</u> {{ user.profil.totalAmount }}</p>
+            <div class="text-center m-5">
+                <a href="{{ path('profil_edit') }}">
+                    <button class="btn main-btn">
+                        Modifier mes informations personnelles
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

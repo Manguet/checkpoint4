@@ -1,0 +1,38 @@
+{% extends 'email/layout.html.twig' %}
+
+{% block body %}
+    <style>
+        h1 {
+            color: #000;
+            text-align: center;
+            padding-top: 5vh;
+        }
+        .team {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        .band {
+            width: 100vw;
+            height: 15vh;
+            background-color: #52BE80;
+            color: #000;
+        }
+        p, h2 {
+            text-align: center;
+        }
+    </style>
+    <div class="band">
+        <h1>Wild Circus</h1>
+    </div>
+
+    <h2>Vous avez un message de {{ contactData.email }}</h2>
+
+    <p>{{ contactData.text }}</p>
+
+    <div class="band">
+        <p class="team">L'équipe Wild Circus</p>
+    </div>
+{% endblock %}
+
