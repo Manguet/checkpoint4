@@ -5,14 +5,18 @@
 {% block body %}
 <div class="game-container">
     <div class="container">
-        <div class="d-flex justify-content-between">
-            <p>BlackJack</p>
-            <a href="#">Historique</a>
-            <p>WildCoins : {{ user.profil.totalAmount }}</p>
-        </div>
+        {% include 'game/templates/header.html.twig' %}
 
-        <div>
-
+        <div class="boardtable mb-5 d-flex justify-content-around align-items-center">
+            <button type="button" class="btn main-btn" data-toggle="modal" data-target="#RulesModal">
+                Règles du jeu
+            </button>
+            {% include 'game/rules.html.twig' %}
+            <a href="{{ path('game_new') }}">
+                <button type="button" class="btn main-btn">
+                    Début de Partie
+                </button>
+            </a>
         </div>
     </div>
 </div>

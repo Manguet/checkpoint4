@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Animal;
 use App\Entity\Booking;
+use App\Entity\Card;
 use App\Entity\Collaborator;
 use App\Entity\Image;
 use App\Entity\User;
 use App\Form\AnimalImageType;
 use App\Form\AnimalType;
+use App\Form\CardType;
 use App\Form\CollaboratorType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -139,15 +141,16 @@ class AdminController extends AbstractController
     /**
      * @Route("/animals", name="animals")
      * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return Response
      */
-    public function animalIndex(PaginatorInterface $paginator)
+    public function animalIndex(PaginatorInterface $paginator, Request $request)
     {
         $pagination = $paginator->paginate(
             $this->getDoctrine()
                 ->getRepository(Animal::class)
                 ->findAll(),
-            1,
+            $request->query->getInt('page', 1),
             10);
 
         return $this->render('admin/animals/animals.html.twig', [
@@ -286,21 +289,23 @@ class AdminController extends AbstractController
     /**
      * @Route("/collaborators", name="collaborators")
      * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return Response
      */
-    public function collaboratorsIndex(PaginatorInterface $paginator)
+    public function collaboratorsIndex(PaginatorInterface $paginator, Request $request)
     {
         $pagination = $paginator->paginate(
             $this->getDoctrine()
                 ->getRepository(Collaborator::class)
                 ->findAll(),
-            1,
+            $request->query->getInt('page', 1),
             10);
 
         return $this->render('admin/collaborators/collaborators.html.twig', [
             'pagination' => $pagination,
         ]);
     }
+
     /**
      * @Route("/collaborator/new", name="collaborator_new")
      * @param EntityManagerInterface $entityManager
@@ -364,6 +369,53 @@ class AdminController extends AbstractController
         return $this->render('admin/collaborators/edit.html.twig', [
             'collaborator' => $collaborator,
             'form'         => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/cards", name="cards")
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
+    public function Cards(PaginatorInterface $paginator, Request $request)
+    {
+        $cards =  $this->getDoctrine()
+            ->getRepository(Card::class)
+            ->findAll();
+
+        $pagination = $paginator->paginate(
+            $cards,
+            $request->query->getInt('page', 1),
+            10);
+
+        return $this->render('admin/cards/cards.html.twig', [
+            'pagination' => $pagination,
+        ]);
+    }
+
+    /**
+     * @Route("/card/new", name="card_new")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function newCard(EntityManagerInterface $entityManager, Request $request)
+    {
+        $card = new Card();
+
+        $form = $this->createForm(CardType::class, $card);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($card);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'La carte a bien été ajoutée!');
+            return $this->redirectToRoute('admin_card_new');
+        }
+
+        return $this->render('admin/cards/new.html.twig', [
+            'form'   => $form->createView(),
         ]);
     }
 }

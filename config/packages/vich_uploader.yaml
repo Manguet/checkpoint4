@@ -25,6 +25,14 @@ vich_uploader:
 
             delete_on_update: false
             delete_on_remove: true
+
+        card:
+            uri_prefix: /uploads/blackjack
+            upload_destination: '%kernel.project_dir%/public/uploads/blackjack'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+            delete_on_update: false
+            delete_on_remove: true
     #mappings:
     #    products:
     #        uri_prefix: /images/products

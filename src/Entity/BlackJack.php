@@ -26,7 +26,7 @@ class BlackJack
     /**
      * @ORM\Column(type="integer")
      */
-    private $to_pay;
+    private $toPay;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -38,9 +38,25 @@ class BlackJack
      */
     private $profils;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="blackjack")
+     */
+    private $cards;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $playerScore;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $bankScore;
+
     public function __construct()
     {
         $this->profils = new ArrayCollection();
+        $this->cards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,12 +78,12 @@ class BlackJack
 
     public function getToPay(): ?int
     {
-        return $this->to_pay;
+        return $this->toPay;
     }
 
-    public function setToPay(int $to_pay): self
+    public function setToPay(int $toPay): self
     {
-        $this->to_pay = $to_pay;
+        $this->toPay = $toPay;
 
         return $this;
     }
@@ -108,6 +124,61 @@ class BlackJack
             $this->profils->removeElement($profil);
             $profil->removeBlackjack($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Card[]
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): self
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards[] = $card;
+            $card->setBlackjack($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): self
+    {
+        if ($this->cards->contains($card)) {
+            $this->cards->removeElement($card);
+            // set the owning side to null (unless already changed)
+            if ($card->getBlackjack() === $this) {
+                $card->setBlackjack(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPlayerScore(): ?int
+    {
+        return $this->playerScore;
+    }
+
+    public function setPlayerScore(int $playerScore): self
+    {
+        $this->playerScore = $playerScore;
+
+        return $this;
+    }
+
+    public function getBankScore(): ?int
+    {
+        return $this->bankScore;
+    }
+
+    public function setBankScore(int $bankScore): self
+    {
+        $this->bankScore = $bankScore;
 
         return $this;
     }
