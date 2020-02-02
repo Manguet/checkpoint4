@@ -21,7 +21,7 @@
                         <td>#</td>
                         <td>{{ loop.index }}</td>
                         <td>
-                            {% if game.playerScore > game.bankScore and game.playerScore <= 21 %}
+                            {% if ( game.playerScore > game.bankScore and game.playerScore <= 21 ) or (game.playerScore < game.bankScore and game.bankScore > 21)  %}
                                 Victoire
                             {% else %}
                                 Défaite
