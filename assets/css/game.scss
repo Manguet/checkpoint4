@@ -32,4 +32,7 @@
       text-shadow: 3px 3px 3px $black;
     }
   }
+  .modal-body, .modal-content {
+    background-color: $green;
+  }
 }

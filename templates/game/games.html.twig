@@ -27,7 +27,7 @@
                                 Défaite
                             {% endif %}
                         </td>
-                        <td>{{ game.toPay }}</td>
+                        <td>{{ game.toPay | abs }}</td>
                         <td>Joueur {{ game.playerScore }} / {{ game.bankScore }} Croupier</td>
                         <td>{{ game.playedAt | date('d/m/Y H:i') }}</td>
                     </tr>
